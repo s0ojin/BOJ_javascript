@@ -11,7 +11,7 @@ for(let num=1; num<=N; num++) {
     if(seperatedNumArr.length<3) {
         continue;
     } else {
-        for(let i=1; i<seperatedNumArr.length-1; i++){
+        for(let i=0; i<seperatedNumArr.length-1; i++){
             if(seperatedNumArr[i+1]-seperatedNumArr[i] !== d) {
                 isArithmetic[num] = false;
                 break;
@@ -19,4 +19,5 @@ for(let num=1; num<=N; num++) {
         }
     }
 }
+
 console.log(isArithmetic.filter(boolean=> boolean === true).length);
