@@ -7,36 +7,28 @@ const input = require("fs")
 
 input.shift();
 
-const max = Math.max(...input);
-const nonPrime = { 1: true };
-
-for (let i = 2; i <= max; i++) {
-  if (nonPrime[i]) {
-    continue;
+const isPrime = (num) => {
+  if (num === 1) {
+    return false;
   }
 
-  for (let j = i ** 2; j <= max; j += i) {
-    nonPrime[j] = true;
-  }
-}
-
-const primeArr = [];
-
-for (i = 2; i <= max; i++) {
-  if (!nonPrime[i]) {
-    primeArr.push(i);
-  }
-}
-
-const goldbachNum = [];
-input.forEach((input) => {
-  for (let i = 0; primeArr[i] <= input / 2; i++) {
-    const otherPrimeIndex = primeArr.indexOf(input - primeArr[i]);
-
-    if (otherPrimeIndex !== -1) {
-      goldbachNum.push([primeArr[i], primeArr[otherPrimeIndex]]);
+  for (let i = 2; i <= Math.sqrt(num); i++) {
+    if (num % i === 0) {
+      return false;
     }
   }
-  const answer = goldbachNum.pop();
-  console.log(answer[0], answer[1]);
+
+  return true;
+};
+
+input.forEach((input) => {
+  let left = input / 2;
+  let right = input / 2;
+
+  while (!isPrime(left) || !isPrime(right)) {
+    left -= 1;
+    right += 1;
+  }
+
+  console.log(left, right);
 });
