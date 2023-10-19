@@ -5,10 +5,4 @@ const input = require("fs")
   .split(" ")
   .map(Number);
 
-let answer = 0;
-
-input.forEach((num) => {
-  answer += num ** 2;
-});
-
-console.log(answer % 10);
+console.log(input.reduce((acc, cur) => acc + cur ** 2, 0) % 10);
