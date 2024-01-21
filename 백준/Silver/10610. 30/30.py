@@ -2,11 +2,11 @@ N = input()
 
 nums = []
 for i in N:
-  nums.append(i)
+  nums.append(int(i))
 
 nums.sort(reverse=True)
 
-if int("".join(nums)) % 30 == 0:
-  print(int("".join(nums)))
+if nums[-1] == 0 and sum(nums) % 3 == 0:
+  print("".join(map(str,nums)))
 else:
   print(-1)
