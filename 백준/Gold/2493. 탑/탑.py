@@ -4,7 +4,7 @@ answer = [0 for i in range(N)]
 stack = []
 
 for idx, tower in enumerate(towers):    
-    while stack and stack[-1][1] <= tower:
+    while stack and stack[-1][1] < tower:
         stack.pop()
 
     if stack:
