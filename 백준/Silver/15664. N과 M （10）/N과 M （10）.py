@@ -1,25 +1,28 @@
 N, M = map(int, input().split())
 nums = list(map(int, input().split()))
-nums. sort()
-visited = [0] * N
 stack = []
+visited = [0] * (N+1)
 answer = []
 
-def dfs(depth, idx):
+nums.sort()
+
+
+def dfs(depth):
     if depth == M:
-        if not tuple(stack) in answer: 
-            answer.append(tuple(stack))
+        if ' '.join(map(str, stack)) not in answer:
+            answer.append(' '.join(map(str, stack)))
         return
 
-    for i in range(N):
-        if not visited[i] and i > idx:
-            visited[i] = 1
-            stack.append(nums[i])
-            dfs(depth+1, i)
+    for idx, num in enumerate(nums):
+        if stack and stack[-1] > num:
+            continue
+        if not visited[idx]:
+            visited[idx] = 1
+            stack.append(num)
+            dfs(depth+1)
             stack.pop()
-            visited[i] = 0
-    
-dfs(0, -1)
+            visited[idx] = 0
 
-for ans in answer:
-    print(*ans)
+
+dfs(0)
+print(*answer, sep='\n')
